@@ -3,8 +3,8 @@ import { Response } from "express";
 export interface ApiResponse<T = unknown> {
     success: boolean;
     statusCode: number;
-    message: string;
-    data?: T;
+    message: string | undefined;
+    data: T;
 }
 
 export const sendResponse = <T>(res: Response, statusCode: number, message: string, data?: T) => {
