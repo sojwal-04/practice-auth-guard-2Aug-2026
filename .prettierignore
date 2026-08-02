@@ -1,0 +1,14 @@
+node_modules
+.next
+.expo
+dist
+build
+out
+public
+.git
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+.env*
+llms.txt
+llms-full.txt
