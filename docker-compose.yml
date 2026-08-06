@@ -5,6 +5,9 @@ services:
     container_name: redis-rate-guard-container
     ports:
       - "6380:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -55,5 +58,6 @@ services:
 #       - .:/app #Mounts your source code into the container
 #       - /app/node_modules #protect container node modules
 
-# volumes:
-#   postgres-data:
+volumes:
+  postgres-data:
+  redis-data:

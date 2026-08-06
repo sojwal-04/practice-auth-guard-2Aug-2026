@@ -1,9 +1,22 @@
 import { Request, Response, NextFunction } from "express";
 
-export const asyncHandler = (
+// Overload: Handler with next parameter
+export function asyncHandler(
     fn: (req: Request, res: Response, next: NextFunction) => Promise<void>
-) => {
+): (req: Request, res: Response, next: NextFunction) => void;
+
+// Overload: Handler without next parameter (most common for routes)
+export function asyncHandler(
+    fn: (req: Request, res: Response) => Promise<void>
+): (req: Request, res: Response, next: NextFunction) => void;
+
+// Implementation
+export function asyncHandler(
+    fn:
+        | ((req: Request, res: Response, next: NextFunction) => Promise<void>)
+        | ((req: Request, res: Response) => Promise<void>)
+) {
     return (req: Request, res: Response, next: NextFunction) => {
-        Promise.resolve(fn(req, res, next)).catch(next);
+        Promise.resolve((fn as any)(req, res, next)).catch(next);
     };
-};
+}

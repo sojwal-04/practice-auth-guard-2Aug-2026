@@ -31,17 +31,3 @@ export class AppError extends Error {
         return new AppError(message, 500);
     }
 }
-
-// export class AppError2 extends Error {
-//     constructor(
-//         public message: string,
-//         public statusCode: number
-//     ) {
-//         super(message);
-//         this.name = "AppError";
-//     }
-
-//     static badRequest(message: string) {
-//         return new AppError(message, 400);
-//     }
-// }
